@@ -51,14 +51,14 @@ def editarAsignatura(request, codAsig):
 	
 	#post = get_object_or_404(Post, pk=pk)
 	if request.method == "POST":
-		form = FormEditar(request.POST, instance=asignatura)
+		form = FormModificarAsignatura(request.POST, instance=asignatura)
 		if form.is_valid():
 			asignatura = form.save(commit=False)
-			#asignatura.diaHora = ''
+			#asignatura. = ''
 			asignatura.save()
-			return redirect('detallesAsignatura', codAsig=asignatura.codAsig)
+			return redirect('coordinaAsignaturas:detallesAsignatura', codAsig=asignatura.codAsig)
 	else :
-		form =  FormEditar(instance=asignatura)
+		form =  FormModificarAsignatura(instance=asignatura)
 	return render(request, 'coordinaAsignaturas/editAsignatura.html', {'form' : form})
 
 def detallesAsignatura(request, codAsig):

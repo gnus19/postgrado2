@@ -33,48 +33,49 @@ class FormularioAsignatura(forms.ModelForm):
     
     class Meta:
         model = Asignatura
-        exclude = ['diaHora']
+        exclude = []
         labels = {'codAsig' : 'Codigo de asignatura',
                   'creditos' : 'Numero de creditos',
                   'nomAsig' : 'Nombre',
                   'progAsig' : 'Programa',
                   'prof' : 'Profesor',
+                  'diaHora' : 'Horario',
                   }
    
     # Haciendole override al metodo clean
-    def clean(self):
-        
-        limpio = super(FormularioAsignatura, self).clean()
-        codigo = limpio.get('codAsig')
-        nombre = limpio.get('nomAsig')
-        dias = ['lun','mar','mie','jue','vie']
-        d = False
-        for dia in dias :
-            d = d or limpio.get(dia)
-        if not(d) :
-            self.add_error('lun', 'Debe haber al menos un dia de clases')
-            return limpio
-        
-        for dia in dias :
-            if  limpio.get(dia) == False :
-                continue
-            if int(limpio.get(dia+"_inicio")) >= int(limpio.get(dia+"_fin")) :
-                self.add_error(dia+'_inicio', 'El intervalo de tiempo debe ser positivo')
-        
-        return limpio
+#    def clean(self):
+#        
+#        limpio = super(FormularioAsignatura, self).clean()
+#        codigo = limpio.get('codAsig')
+#        nombre = limpio.get('nomAsig')
+#        dias = ['lun','mar','mie','jue','vie']
+#        d = False
+#        for dia in dias :
+#            d = d or limpio.get(dia)
+#        if not(d) :
+#            self.add_error('lun', 'Debe haber al menos un dia de clases')
+#            return limpio
+#        
+#        for dia in dias :
+#            if  limpio.get(dia) == False :
+#                continue
+#            if int(limpio.get(dia+"_inicio")) >= int(limpio.get(dia+"_fin")) :
+#                self.add_error(dia+'_inicio', 'El intervalo de tiempo debe ser positivo')
+#        
+#        return limpio
     
-    def save(self, commit=True):
-        asignatura = super(FormularioAsignatura, self).save(commit=False)
-        dias = ['lun','mar','mie','jue','vie']
-        dias_clase = []
-        for dia in dias :
-            if self.cleaned_data[dia] :
-                dias_clase.append(dia)
-        s = [dia+" "+self.cleaned_data[dia+'_inicio']+"-"+self.cleaned_data[dia+'_fin'] for dia in dias_clase]
-        asignatura.diaHora = " ; ".join(s)
-        if commit:
-            asignatura.save()
-        return asignatura
+#    def save(self, commit=True):
+#        asignatura = super(FormularioAsignatura, self).save(commit=False)
+#        dias = ['lun','mar','mie','jue','vie']
+#        dias_clase = []
+#        for dia in dias :
+#            if self.cleaned_data[dia] :
+#                dias_clase.append(dia)
+#        s = [dia+" "+self.cleaned_data[dia+'_inicio']+"-"+self.cleaned_data[dia+'_fin'] for dia in dias_clase]
+#        asignatura.diaHora = " ; ".join(s)
+#       if commit:
+#            asignatura.save()
+#        return asignatura
 
 class FormCrearAsignatura(FormularioAsignatura) :
     def clean(self) :
@@ -103,10 +104,5 @@ class FormModificarAsignatura(FormularioAsignatura) :
         super(FormModificarAsignatura, self).__init__(*args, **kwargs)
         codAsig = getattr(self, 'codAsig', None)
         self.fields['codAsig'].widget.attrs['readonly'] = True
-
-class FormEditar(forms.ModelForm):
-    class Meta:
-        model = Asignatura
-        fields = ('codAsig', 'nomAsig', 'creditos', 'codDpto', 'progAsig', 'prof', 'diaHora')
 
 

@@ -140,16 +140,17 @@
                             <form method="POST" class="post-form">
                                 {% csrf_token %}
                                 {{ form.as_p }}
-                            <button type="submit" class="save btn btn-default">Save</button>
+                            <!--<button type="submit" class="save btn btn-default">Save</button>-->
+                            <div class="">
+                                <button type="submit" class="btn bg-amber waves-effect .align-right">
+                                <i class="material-icons">save</i>
+                                <span>Guardar</span>
+                                 </button>
+                            </div>
                             </form>
                         </div>
                     </div>
-                    <div class="">
-                    <button type="button" class="btn bg-amber waves-effect .align-right">
-                        <i class="material-icons">save</i>
-                        <span>Guardar</span>
-                    </button>
-                </div>
+                    
                 </div>
             </div>
         </div>
