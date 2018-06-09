@@ -2,9 +2,9 @@
 
 
 from django import forms
-from coordinaAsignaturas.models import *
+from .models import *
 import hashlib
- 
+
 class LoginForm(forms.Form) :
     username = forms.EmailField(max_length=30)
     password = forms.CharField(max_length=64, widget=forms.PasswordInput)
@@ -29,21 +29,7 @@ class LoginForm(forms.Form) :
 
 
 class FormularioAsignatura(forms.ModelForm):
-    lun = forms.BooleanField(required=False)
-    lun_inicio = forms.ChoiceField(choices=[(n, n) for n in range(1, 11)])
-    lun_fin = forms.ChoiceField(choices=[(n, n) for n in range(1, 11)])
-    mar = forms.BooleanField(required=False)
-    mar_inicio = forms.ChoiceField(choices=[(n, n) for n in range(1, 11)])
-    mar_fin = forms.ChoiceField(choices=[(n, n) for n in range(1, 11)])
-    mie = forms.BooleanField(required=False)
-    mie_inicio = forms.ChoiceField(choices=[(n, n) for n in range(1, 11)])
-    mie_fin = forms.ChoiceField(choices=[(n, n) for n in range(1, 11)])
-    jue = forms.BooleanField(required=False)
-    jue_inicio = forms.ChoiceField(choices=[(n, n) for n in range(1, 11)])
-    jue_fin = forms.ChoiceField(choices=[(n, n) for n in range(1, 11)])
-    vie = forms.BooleanField(required=False)
-    vie_inicio = forms.ChoiceField(choices=[(n, n) for n in range(1, 11)])
-    vie_fin = forms.ChoiceField(choices=[(n, n) for n in range(1, 11)])
+    
     
     class Meta:
         model = Asignatura
@@ -52,7 +38,8 @@ class FormularioAsignatura(forms.ModelForm):
                   'creditos' : 'Numero de creditos',
                   'nomAsig' : 'Nombre',
                   'progAsig' : 'Programa',
-                  'prof' : 'Profesor'}
+                  'prof' : 'Profesor',
+                  }
    
     # Haciendole override al metodo clean
     def clean(self):
@@ -118,14 +105,6 @@ class FormModificarAsignatura(FormularioAsignatura) :
         self.fields['codAsig'].widget.attrs['readonly'] = True
 
 
-    class Meta:
-        model = Asignatura
-        exclude = ['diaHora']
-        labels = {'codAsig' : 'Codigo de asignatura',
-                  'creditos' : 'Numero de creditos',
-                  'nomAsig' : 'Nombre',
-                  'progAsig' : 'Programa',
-                  'prof' : 'Profesor'}
 
 '''
         # Comprobando que no haya una asignatura con igual codigo
@@ -143,3 +122,5 @@ class FormModificarAsignatura(FormularioAsignatura) :
             pass
 '''
 # Comprobando que haya al menos un día de clases
+
+

@@ -94,13 +94,13 @@
                 <ul class="list">
                     <li class="header">OPCIONES</li>
                     <li class="">
-                        <a href="index.html">
+                        <a href="{% url 'coordinaAsignaturas:principal' %}">
                             <i class="material-icons">home</i>
                             <span>Inicio</span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="index.html">
+                        <a href="">
                             <i class="material-icons">business</i>
                             <span>Asignaturas</span>
                         </a>
@@ -190,61 +190,28 @@
                                 <table class="table table-hover dashboard-task-infos">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
                                             <th>Código</th>
                                             <th>UC</th>
                                             <th>Denominación y Programa</th>
                                             <th>Profesor</th>
                                             <th>Programa</th>
                                             <th>Horario</th>
+                                            <th> </th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for a in asignaturas %}
                                         <tr>
-                                            <td>1</td>
-                                            <td>EA-7431</td>
-                                            <td>3</td>
-                                            <td><span class="">Evaluación del Impacto ambiental del Desarrollo</span></td>
-                                            <td>Prof. Rafael Lairet</td>
-                                            <td>5601-E</td>
-                                            <td>Martes 7-9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>EA7522</td>
-                                            <td>3</td>
-                                            <td><span class="">TOPICO II: LOS RIESGOS DEL CAMBIO CLIMÁTICO. EVALUACIÓN Y MANEJO.</span></td>
-                                            <td>ALICIA VILLAMIZAR</td>
-                                            <td>5600-E</td>
-                                            <td>Martes 3-5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>CE-7288</td>
-                                            <td>3</td>
-                                            <td><span class="">Modelos de políticas  públicas  I</span></td>
-                                            <td>Prof. Marino González</td>
-                                            <td>5600-E</td>
-                                            <td>Martes 4-7</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>CE-6217</td>
-                                            <td>3</td>
-                                            <td><span class="">Economía Ambiental y de los Recursos Naturales</span></td>
-                                            <td>Prof. Yazenia Frontado</td>
-                                            <td>5601-O</td>
-                                            <td>Lunes 7-9</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>CC-7121</td>
-                                            <td>3</td>
-                                            <td><span class="">Metodología de la Investigación I (Fundamentos de Investigación)</span></td>
-                                            <td>Prof. Sandra Leal</td>
-                                            <td>5601-O</td>
-                                            <td>Martes 3-5</td>
-                                        </tr>
+                                            
+                                            <td>{{ a.codAsig }}</td>
+                                            <td>{{ a.creditos }}</td>
+                                            <td><span class="">{{ a.nomAsig }}</span></td>
+                                            <td>{{ a.prof.nomProf }}</td>
+                                            <td>{{ a.progAsig }}</td>
+                                            <td>{{ a.diaHora }}</td>
+                                            <td><a href="{% url 'coordinaAsignaturas:detallesAsignatura' codAsig=a.codAsig %}">Ver mas</a></td>
+                                        </tr>    
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                                 <nav>

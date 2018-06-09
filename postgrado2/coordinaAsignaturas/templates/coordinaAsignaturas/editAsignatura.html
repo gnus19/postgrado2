@@ -137,47 +137,11 @@
                 <div class="body">
                     <div class="row clearfix">
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="EA-7431" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="3 Créditos" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="Prof. Rafael Lairet" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="Evaluación del Impacto ambiental del Desarrollo" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="Martes 7-9
-(1:30-4:30pm)" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="5602-E" />
-                                </div>
-                            </div>
+                            <form method="POST" class="post-form">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                            <button type="submit" class="save btn btn-default">Save</button>
+                            </form>
                         </div>
                     </div>
                     <div class="">
