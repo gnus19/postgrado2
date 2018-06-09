@@ -104,23 +104,9 @@ class FormModificarAsignatura(FormularioAsignatura) :
         codAsig = getattr(self, 'codAsig', None)
         self.fields['codAsig'].widget.attrs['readonly'] = True
 
-
-
-'''
-        # Comprobando que no haya una asignatura con igual codigo
-        try:
-            Asignatura.objects.get(codAsig=codigo)
-            self.add_error('codAsig', 'Ya existe una asignatura con ese codigo')
-        except Asignatura.DoesNotExist :
-            pass
-       
-        # Comprobando que no haya una asignatura con igual nombre
-        try:
-            Asignatura.objects.get(nomAsig=nombre)
-            self.add_error('nomAsig', 'Ya existe una asignatura con ese nombre')
-        except Asignatura.DoesNotExist :
-            pass
-'''
-# Comprobando que haya al menos un día de clases
+class FormEditar(forms.ModelForm):
+    class Meta:
+        model = Asignatura
+        fields = ('codAsig', 'nomAsig', 'creditos', 'codDpto', 'progAsig', 'prof', 'diaHora')
 
 

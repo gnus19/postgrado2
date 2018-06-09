@@ -4,7 +4,7 @@
 from . import views
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout
-from django.urls import path
+
 
 app_name = 'coordinaAsignaturas'
 urlpatterns = [

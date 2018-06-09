@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
-from django.shortcuts import render, HttpResponse, get_object_or_404
+from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.template import loader
-from coordinaAsignaturas.models import *
+from .models import *
 from .forms import *
 # Create your views here.
 def home(request):
@@ -51,14 +51,14 @@ def editarAsignatura(request, codAsig):
 	
 	#post = get_object_or_404(Post, pk=pk)
 	if request.method == "POST":
-		form = FormModificarAsignatura(request.POST, instance=asignatura)
+		form = FormEditar(request.POST, instance=asignatura)
 		if form.is_valid():
 			asignatura = form.save(commit=False)
 			#asignatura.diaHora = ''
 			asignatura.save()
-			return redirect('detallesAsignatura', codAsig=asignatura)
+			return redirect('detallesAsignatura', codAsig=asignatura.codAsig)
 	else :
-		form =  FormModificarAsignatura(instance=asignatura)
+		form =  FormEditar(instance=asignatura)
 	return render(request, 'coordinaAsignaturas/editAsignatura.html', {'form' : form})
 
 def detallesAsignatura(request, codAsig):
