@@ -5,6 +5,7 @@ from django.shortcuts import render, HttpResponse
 from django.template import loader
 from coordinaAsignaturas.models import *
 from coordinaAsignaturas.forms import *
+from django.shortcuts import redirect
 # Create your views here.
 def home(request):
 
@@ -31,14 +32,18 @@ def vistaAsignaturas(request):
 
 # Agregar una asignatura #
 def agregarAsignatura(request):
-	#if request.method == 'POST':
-	#	form = FormularioAsignatura(request.POST)
-	#	args = {'form' : form}
-	#	if form.is_valid():
-	#		form.save()
-	#else :
-	#	args = {'form' : FormularioAsignatura()}
-	return render(request, 'coordinaAsignaturas/addAsignatura.html', {})
+	if request.method == 'POST':
+		form = FormularioAsignatura(request.POST)
+		args = {'form' : form}
+		if form.is_valid():
+			form.save()
+			print(args)
+			return redirect('detalles')
+			
+	else :
+		args = {'form' : FormularioAsignatura()}
+		print(args)
+	return render(request, 'coordinaAsignaturas/addAsignatura.html', args)
 
 def editarAsignatura(request):
 	return render(request, 'coordinaAsignaturas/editAsignatura.html', {})
