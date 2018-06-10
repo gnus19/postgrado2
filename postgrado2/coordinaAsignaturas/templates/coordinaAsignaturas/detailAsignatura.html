@@ -94,14 +94,14 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">OPCIONES</li>
-                    <li class="active">
+                    <li class="">
                         <a href="index.html">
                             <i class="material-icons">home</i>
                             <span>Inicio</span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="index.html">
+                        <a href="{% url 'coordinaAsignaturas:verAsignatura' %}">
                             <i class="material-icons">business</i>
                             <span>Asignaturas</span>
                         </a>
@@ -139,52 +139,51 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="EA-7431" />
+                                    <input type="text" class="form-control" value="" placeholder="{{ asignatura.codAsig }}" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="3 Créditos" />
+                                    <input type="text" class="form-control" value="" placeholder="{{ asignatura.creditos }}" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="Prof. Rafael Lairet" />
+                                    <input type="text" class="form-control" value="" placeholder="{{ asignatura.prof.nomProf }}" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="Evaluación del Impacto ambiental del Desarrollo" />
+                                    <input type="text" class="form-control" value="" placeholder="{{ asignatura.nomAsig }}" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="Martes 7-9
-(1:30-4:30pm)" />
+                                    <input type="text" class="form-control" value="" placeholder="{{ asignatura.diaHora }}" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" value="" placeholder="5602-E" />
+                                    <input type="text" class="form-control" value="" placeholder="{{ asignatura.progAsig }}" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="">
-                    <button type="button" class="btn bg-amber waves-effect waves-amber .align-right">
+                    <a href="{% url 'coordinaAsignaturas:editarAsignatura' codAsig=asignatura.codAsig %}"><button type="button" class="btn bg-amber waves-effect waves-amber .align-right">
                         <i class="material-icons">edit</i>
                         <span>Editar</span>
-                    </button>
+                    </button></a>
                     <button type="button" class="btn bg-red waves-effect waves-red .align-right">
                         <i class="material-icons">delete</i>
                         <span>Eliminar</span>

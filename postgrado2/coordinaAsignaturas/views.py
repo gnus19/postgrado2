@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.template import loader
 from coordinaAsignaturas.models import *
 from coordinaAsignaturas.forms import *
 from django.shortcuts import redirect
+from .models import *
+from .forms import *
 # Create your views here.
 def home(request):
 
@@ -14,6 +16,11 @@ def home(request):
 
 	args = {'myName': name, 'numbers': numbers}
 	return render(request, 'coordinaAsignaturas/login.html', args)
+
+def principal(request):
+	asignaturas = Asignatura.objects.all()
+	context = {'asignaturas' : asignaturas}
+	return render(request, 'coordinaAsignaturas/initIndex.html', context)
 
 def vistaOfertas(request, oferta_id):
 	#return HttpResponse("Estas en la vista de oferta %s" % oferta_id)
@@ -27,7 +34,8 @@ def vistaOfertas(request, oferta_id):
 
 # Ver las asisnaturas #
 def vistaAsignaturas(request):
-	args = {'asignaturas' : Asignatura.objects.all()}
+	asignaturas = Asignatura.objects.all()
+	args = {'asignaturas' : asignaturas}
 	return render(request, 'coordinaAsignaturas/asignaturas.html', args)
 
 # Agregar una asignatura #
@@ -36,17 +44,30 @@ def agregarAsignatura(request):
 		form = FormularioAsignatura(request.POST)
 		args = {'form' : form}
 		if form.is_valid():
+			print(1)
 			form.save()
-			print(args)
-			return redirect('detalles')
-			
+			print(form)
+			return redirect('/coordinaAsignaturas/ver')		
 	else :
 		args = {'form' : FormularioAsignatura()}
 		print(args)
 	return render(request, 'coordinaAsignaturas/addAsignatura.html', args)
 
-def editarAsignatura(request):
-	return render(request, 'coordinaAsignaturas/editAsignatura.html', {})
+def editarAsignatura(request, codAsig):
+	asignatura = get_object_or_404(Asignatura, codAsig=codAsig)
+	
+	#post = get_object_or_404(Post, pk=pk)
+	if request.method == "POST":
+		form = FormModificarAsignatura(request.POST, instance=asignatura)
+		if form.is_valid():
+			asignatura = form.save(commit=False)
+			#asignatura. = ''
+			asignatura.save()
+			return redirect('coordinaAsignaturas:detallesAsignatura', codAsig=asignatura.codAsig)
+	else :
+		form =  FormModificarAsignatura(instance=asignatura)
+	return render(request, 'coordinaAsignaturas/editAsignatura.html', {'form' : form})
 
-def detallesAsignatura(request):
-	return render(request, 'coordinaAsignaturas/detailAsignatura.html', {})
+def detallesAsignatura(request, codAsig):
+	asignatura = get_object_or_404(Asignatura, codAsig=codAsig)
+	return render(request, 'coordinaAsignaturas/detailAsignatura.html', {'asignatura' : asignatura})

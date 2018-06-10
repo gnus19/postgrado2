@@ -133,7 +133,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card">
-                <div class="header">
+                <div class="header text-center">
                     <h2>
                         Añadir Asignatura <i class="material-icons col-amber">add</i>
                         <small>Aquí podrás añadir una nueva asignatura a tu coordinación</small>
@@ -142,11 +142,239 @@
                 </div>
                 <div class="body">
                     <div class="row clearfix">
-                        
-                         <div class="col-sm-6">
+                        <form method="post" novalidate>
+                          {% csrf_token %}
+                                <div class="col-sm-6 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label for="form.codAsig.id_for_label">Código</label>
+                                            {{form.codAsig}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label for="form.creditos.id_for_label">Créditos</label>
+                                            {{form.creditos}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="form-line text-center">
+                                            <label for="form.nomAsig.id_for_label">Denominación y Programa</label>
+                                            {{form.nomAsig}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label for="form.progAsig.id_for_label">Programa</label>
+                                            {{form.progAsig}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label for="form.prof.id_for_label">Profesor</label>
+                                            {{form.prof}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label for="form.diaHora.id_for_label">Horario</label>
+                                            {{form.diaHora}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="">
+                                            <button type="submit" class="btn bg-amber waves-effect col-sm-12">
+                                              <i class="material-icons">save</i>
+                                                <span>Guardar</span>
+                                          </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- <div class="col-sm-4 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="">
+                                            {{form.diaHora}}
+                                            <label for="lun">Lunes</label>
+                                            <select name="lun_inicio" id="">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                            </select>
+                                            <select name="lun_fin" id="">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="col-sm-4 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="">
+                                            <label for="mar">Martes</label>
+                                            <select name="mar_inicio" id="">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                            </select>
+                                            <select name="mar_fin" id="">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="col-sm-4 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="">
+                                            <label for="mie">Miércoles</label>
+                                            <select name="mie_inicio" id="">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                            </select>
+                                            <select name="mie_fin" id="">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="col-sm-4 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="">
+                                            <label for="jue">Jueves</label>
+                                            <select name="jue_inicio" id="">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                            </select>
+                                            <select name="jue_fin" id="">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="col-sm-4 fieldWrapper">
+                                    <div class="form-group">
+                                        <div class="">
+                                            <label for="vie">Viernes</label>
+                                            <select name="vie_inicio" id="">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                            </select>
+                                            <select name="vie_fin" id="">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div> -->
+                          
+                        </form>
+                        <!-- <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="codAsig" placeholder="Código" />
+                                    <input type="text" class="form-control" value="" placeholder="Código" />
                                 </div>
                             </div>
                         </div>
@@ -184,7 +412,7 @@
                                     <input type="text" class="form-control" value="" placeholder="Programa" />
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
